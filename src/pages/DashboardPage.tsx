@@ -1,0 +1,124 @@
+import { PageHeader } from "@/components/PageHeader";
+import { KpiCard } from "@/components/KpiCard";
+import { GlassCard } from "@/components/GlassCard";
+import { kpiData, demandOverTimeData, topDrugsData, districtDemandData } from "@/data/mockData";
+import { Building2, Package, Target, AlertTriangle, TrendingUp, ArrowUpRight } from "lucide-react";
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, Legend,
+} from "recharts";
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (!active || !payload?.length) return null;
+  return (
+    <div className="glass-card p-3 text-xs space-y-1">
+      <p className="text-muted-foreground font-medium">{label}</p>
+      {payload.map((entry: any, i: number) => (
+        <p key={i} style={{ color: entry.color }}>
+          {entry.name}: <span className="font-semibold">{entry.value?.toLocaleString()}</span>
+        </p>
+      ))}
+    </div>
+  );
+};
+
+const DashboardPage = () => {
+  return (
+    <div className="space-y-6 max-w-[1400px]">
+      <PageHeader title="Dashboard" description="Real-time pharmaceutical demand forecasting overview" />
+
+      {/* KPI Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <KpiCard title="Total Pharmacies" value={kpiData.totalPharmacies.toLocaleString()} change="+12 this month" changeType="positive" icon={Building2} delay={0} />
+        <KpiCard title="Total SKUs" value={kpiData.totalSKUs.toLocaleString()} change="+48 new" changeType="positive" icon={Package} iconColor="bg-accent/15 text-accent" delay={0.05} />
+        <KpiCard title="Forecast Accuracy" value={`${kpiData.forecastAccuracy}%`} change="+1.2% vs last month" changeType="positive" icon={Target} iconColor="bg-success/15 text-success" delay={0.1} />
+        <KpiCard title="Stockout Risk" value={`${kpiData.stockoutRisk}%`} change="-0.5% vs last month" changeType="positive" icon={AlertTriangle} iconColor="bg-warning/15 text-warning" delay={0.15} />
+      </div>
+
+      {/* Charts Row */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Demand Chart */}
+        <GlassCard className="lg:col-span-2 p-5" delay={0.2}>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h3 className="font-semibold text-sm">Predicted vs Actual Demand</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">Last 30 days</p>
+            </div>
+            <TrendingUp className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <ResponsiveContainer width="100%" height={280}>
+            <LineChart data={demandOverTimeData}>
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <Tooltip content={<CustomTooltip />} />
+              <Line type="monotone" dataKey="predicted" stroke="hsl(168 80% 50%)" strokeWidth={2} dot={false} name="Predicted" />
+              <Line type="monotone" dataKey="actual" stroke="hsl(265 70% 60%)" strokeWidth={2} dot={false} name="Actual" strokeDasharray="4 4" />
+            </LineChart>
+          </ResponsiveContainer>
+        </GlassCard>
+
+        {/* Top Drugs */}
+        <GlassCard className="p-5" delay={0.25}>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-sm">Top Demanded Drugs</h3>
+            <ArrowUpRight className="w-4 h-4 text-muted-foreground" />
+          </div>
+          <div className="space-y-3">
+            {topDrugsData.slice(0, 6).map((drug, i) => (
+              <div key={drug.name} className="flex items-center gap-3">
+                <span className="text-xs text-muted-foreground w-4">{i + 1}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate">{drug.name}</p>
+                  <p className="text-xs text-muted-foreground">{drug.category}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-semibold">{(drug.demand / 1000).toFixed(1)}k</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+      </div>
+
+      {/* District Map + Bar Chart */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <GlassCard className="p-5" delay={0.3}>
+          <h3 className="font-semibold text-sm mb-4">District Demand Heatmap</h3>
+          <div className="grid grid-cols-2 gap-2">
+            {districtDemandData.map((d) => (
+              <div key={d.district} className="flex items-center justify-between p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+                <div>
+                  <p className="text-sm font-medium">{d.district}</p>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
+                    d.risk === "high" ? "bg-destructive/15 text-destructive" :
+                    d.risk === "medium" ? "bg-warning/15 text-warning" :
+                    "bg-success/15 text-success"
+                  }`}>
+                    {d.risk} risk
+                  </span>
+                </div>
+                <p className="text-sm font-semibold">{(d.demand / 1000).toFixed(0)}k</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
+
+        <GlassCard className="p-5" delay={0.35}>
+          <h3 className="font-semibold text-sm mb-4">Demand by Drug Category</h3>
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={topDrugsData} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" horizontal={false} />
+              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} width={110} />
+              <Tooltip content={<CustomTooltip />} />
+              <Bar dataKey="demand" fill="hsl(168 80% 50%)" radius={[0, 4, 4, 0]} name="Demand" />
+            </BarChart>
+          </ResponsiveContainer>
+        </GlassCard>
+      </div>
+    </div>
+  );
+};
+
+export default DashboardPage;

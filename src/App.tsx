@@ -3,8 +3,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import { AppSidebar } from "@/components/AppSidebar";
+import DashboardPage from "./pages/DashboardPage";
+import ForecastPage from "./pages/ForecastPage";
+import PharmacyInsightsPage from "./pages/PharmacyInsightsPage";
+import SkuAnalyticsPage from "./pages/SkuAnalyticsPage";
+import AlertsPage from "./pages/AlertsPage";
+import GeographicPage from "./pages/GeographicPage";
+import AdminPage from "./pages/AdminPage";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -14,11 +21,18 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AppSidebar>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/forecast" element={<ForecastPage />} />
+            <Route path="/pharmacies" element={<PharmacyInsightsPage />} />
+            <Route path="/sku" element={<SkuAnalyticsPage />} />
+            <Route path="/alerts" element={<AlertsPage />} />
+            <Route path="/geographic" element={<GeographicPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AppSidebar>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
