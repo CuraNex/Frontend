@@ -20,8 +20,8 @@ const PharmacyInsightsPage = () => {
             <button
               key={p.id}
               onClick={() => setSelected(p)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selected.id === p.id ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:bg-muted/80"
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                selected.id === p.id ? "gradient-primary text-white shadow-md" : "bg-white/60 text-muted-foreground hover:bg-white/80"
               }`}
             >
               {p.name}
@@ -34,7 +34,7 @@ const PharmacyInsightsPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard title="Type" value={selected.type} icon={Building2} delay={0.05} />
         <KpiCard title="Tier" value={`Tier ${selected.tier}`} icon={Star} iconColor="bg-warning/15 text-warning" delay={0.1} />
-        <KpiCard title="Order Frequency" value={selected.orderFreq} icon={ShoppingCart} iconColor="bg-accent/15 text-accent" delay={0.15} />
+        <KpiCard title="Order Frequency" value={selected.orderFreq} icon={ShoppingCart} iconColor="bg-accent text-accent-foreground" delay={0.15} />
         <KpiCard title="District" value={selected.district} icon={Building2} iconColor="bg-info/15 text-info" delay={0.2} />
       </div>
 
@@ -44,11 +44,11 @@ const PharmacyInsightsPage = () => {
           <h3 className="font-semibold text-sm mb-4">Demand Trend</h3>
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={demandOverTimeData.slice(0, 20)}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
               <Tooltip />
-              <Line type="monotone" dataKey="actual" stroke="hsl(168 80% 50%)" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="actual" stroke="hsl(245 58% 60%)" strokeWidth={2.5} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </GlassCard>
@@ -56,7 +56,7 @@ const PharmacyInsightsPage = () => {
         {/* AI Insights */}
         <GlassCard className="p-5" delay={0.3}>
           <div className="flex items-center gap-2 mb-4">
-            <Brain className="w-4 h-4 text-accent" />
+            <Brain className="w-4 h-4 text-primary" />
             <h3 className="font-semibold text-sm">AI Insights</h3>
           </div>
           <div className="space-y-3">
@@ -66,7 +66,7 @@ const PharmacyInsightsPage = () => {
               "Demand for antibiotics is 23% above district average, likely due to proximity to hospital.",
               "Recommended stock buffer increase of 15% for Q2.",
             ].map((insight, i) => (
-              <div key={i} className="p-3 rounded-lg bg-muted/40 border border-border/50">
+              <div key={i} className="p-3 rounded-lg bg-white/50 border border-border/50">
                 <p className="text-xs text-muted-foreground leading-relaxed">{insight}</p>
               </div>
             ))}

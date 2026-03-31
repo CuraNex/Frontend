@@ -15,7 +15,7 @@ const AdminPage = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard title="Best Model" value={best.model} icon={Brain} delay={0} />
         <KpiCard title="MAPE" value={`${best.mape}%`} icon={Target} iconColor="bg-success/15 text-success" delay={0.05} />
-        <KpiCard title="RMSE" value={best.rmse} icon={TrendingDown} iconColor="bg-accent/15 text-accent" delay={0.1} />
+        <KpiCard title="RMSE" value={best.rmse} icon={TrendingDown} iconColor="bg-accent text-accent-foreground" delay={0.1} />
         <KpiCard title="Accuracy" value={`${best.accuracy}%`} icon={Gauge} iconColor="bg-info/15 text-info" delay={0.15} />
       </div>
 
@@ -52,11 +52,11 @@ const AdminPage = () => {
           <h3 className="font-semibold text-sm mb-4">Feature Importance (SHAP-like)</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={featureImportance} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" horizontal={false} />
-              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis type="category" dataKey="feature" tick={{ fontSize: 10, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} width={140} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" horizontal={false} />
+              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis type="category" dataKey="feature" tick={{ fontSize: 10, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} width={140} />
               <Tooltip />
-              <Bar dataKey="importance" fill="hsl(265 70% 60%)" radius={[0, 4, 4, 0]} name="Importance" />
+              <Bar dataKey="importance" fill="hsl(280 60% 65%)" radius={[0, 6, 6, 0]} name="Importance" />
             </BarChart>
           </ResponsiveContainer>
         </GlassCard>

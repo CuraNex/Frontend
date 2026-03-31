@@ -39,8 +39,8 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
         {/* Logo */}
         <div className="h-16 flex items-center px-4 border-b border-sidebar-border shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shrink-0">
-              <Pill className="w-4 h-4 text-primary-foreground" />
+            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center shrink-0 glow-primary">
+              <Pill className="w-4 h-4 text-white" />
             </div>
             <AnimatePresence>
               {!collapsed && (
@@ -48,7 +48,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="font-bold text-lg tracking-tight whitespace-nowrap"
+                  className="font-bold text-lg tracking-tight whitespace-nowrap text-gradient"
                 >
                   CuraNex
                 </motion.span>
@@ -66,9 +66,9 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
                 key={item.path}
                 to={item.path}
                 end
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? "bg-primary/10 text-primary"
+                    ? "sidebar-active-gradient"
                     : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                 }`}
                 activeClassName=""
@@ -109,7 +109,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
         className="flex-1 flex flex-col min-h-screen"
       >
         {/* Top bar */}
-        <header className="h-16 border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-40 flex items-center justify-between px-6">
+        <header className="h-16 border-b border-border bg-white/80 backdrop-blur-sm sticky top-0 z-40 flex items-center justify-between px-6">
           <div className="flex items-center gap-3 flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground" />
             <input
@@ -123,7 +123,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
               <Bell className="w-5 h-5 text-muted-foreground" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
             </button>
-            <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-sm font-semibold text-primary">
+            <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-sm font-semibold text-white">
               A
             </div>
           </div>

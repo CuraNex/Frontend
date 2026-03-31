@@ -30,7 +30,7 @@ const DashboardPage = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard title="Total Pharmacies" value={kpiData.totalPharmacies.toLocaleString()} change="+12 this month" changeType="positive" icon={Building2} delay={0} />
-        <KpiCard title="Total SKUs" value={kpiData.totalSKUs.toLocaleString()} change="+48 new" changeType="positive" icon={Package} iconColor="bg-accent/15 text-accent" delay={0.05} />
+        <KpiCard title="Total SKUs" value={kpiData.totalSKUs.toLocaleString()} change="+48 new" changeType="positive" icon={Package} iconColor="bg-accent text-accent-foreground" delay={0.05} />
         <KpiCard title="Forecast Accuracy" value={`${kpiData.forecastAccuracy}%`} change="+1.2% vs last month" changeType="positive" icon={Target} iconColor="bg-success/15 text-success" delay={0.1} />
         <KpiCard title="Stockout Risk" value={`${kpiData.stockoutRisk}%`} change="-0.5% vs last month" changeType="positive" icon={AlertTriangle} iconColor="bg-warning/15 text-warning" delay={0.15} />
       </div>
@@ -48,12 +48,12 @@ const DashboardPage = () => {
           </div>
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={demandOverTimeData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
               <Tooltip content={<CustomTooltip />} />
-              <Line type="monotone" dataKey="predicted" stroke="hsl(168 80% 50%)" strokeWidth={2} dot={false} name="Predicted" />
-              <Line type="monotone" dataKey="actual" stroke="hsl(265 70% 60%)" strokeWidth={2} dot={false} name="Actual" strokeDasharray="4 4" />
+              <Line type="monotone" dataKey="predicted" stroke="hsl(245 58% 60%)" strokeWidth={2.5} dot={false} name="Predicted" />
+              <Line type="monotone" dataKey="actual" stroke="hsl(280 60% 65%)" strokeWidth={2} dot={false} name="Actual" strokeDasharray="4 4" />
             </LineChart>
           </ResponsiveContainer>
         </GlassCard>
@@ -87,7 +87,7 @@ const DashboardPage = () => {
           <h3 className="font-semibold text-sm mb-4">District Demand Heatmap</h3>
           <div className="grid grid-cols-2 gap-2">
             {districtDemandData.map((d) => (
-              <div key={d.district} className="flex items-center justify-between p-2.5 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors">
+              <div key={d.district} className="flex items-center justify-between p-2.5 rounded-lg bg-white/60 hover:bg-white/80 transition-colors">
                 <div>
                   <p className="text-sm font-medium">{d.district}</p>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
@@ -108,11 +108,11 @@ const DashboardPage = () => {
           <h3 className="font-semibold text-sm mb-4">Demand by Drug Category</h3>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={topDrugsData} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" horizontal={false} />
-              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} width={110} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" horizontal={false} />
+              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} width={110} />
               <Tooltip content={<CustomTooltip />} />
-              <Bar dataKey="demand" fill="hsl(168 80% 50%)" radius={[0, 4, 4, 0]} name="Demand" />
+              <Bar dataKey="demand" fill="hsl(245 58% 60%)" radius={[0, 6, 6, 0]} name="Demand" />
             </BarChart>
           </ResponsiveContainer>
         </GlassCard>

@@ -34,7 +34,7 @@ const SkuAnalyticsPage = () => {
                   key={sku.sku}
                   onClick={() => setSelected(sku)}
                   className={`border-b border-border/50 cursor-pointer transition-colors ${
-                    selected.sku === sku.sku ? "bg-primary/5" : "hover:bg-muted/30"
+                    selected.sku === sku.sku ? "bg-primary/5" : "hover:bg-white/40"
                   }`}
                 >
                   <td className="py-2.5 px-3 font-mono text-xs">{sku.sku}</td>
@@ -60,11 +60,11 @@ const SkuAnalyticsPage = () => {
           <h3 className="font-semibold text-sm mb-4">Demand Trend — {selected.name}</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={demandOverTimeData.slice(0, 20)}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" />
-              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" />
+              <XAxis dataKey="date" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
               <Tooltip />
-              <Line type="monotone" dataKey="predicted" stroke="hsl(168 80% 50%)" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="predicted" stroke="hsl(245 58% 60%)" strokeWidth={2.5} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </GlassCard>
@@ -73,11 +73,11 @@ const SkuAnalyticsPage = () => {
           <h3 className="font-semibold text-sm mb-4">Seasonality Pattern</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={seasonalityData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" />
-              <XAxis dataKey="month" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" />
+              <XAxis dataKey="month" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
               <Tooltip />
-              <Bar dataKey="demand" fill="hsl(265 70% 60%)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="demand" fill="hsl(280 60% 65%)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </GlassCard>
