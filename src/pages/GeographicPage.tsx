@@ -31,10 +31,13 @@ const GeographicPage = () => {
                       <span className="text-muted-foreground">{(d.demand / 1000).toFixed(0)}k</span>
                     </div>
                   </div>
-                  <div className="h-2 bg-muted/50 rounded-full overflow-hidden">
+                  <div className="h-2 bg-white/50 rounded-full overflow-hidden">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-primary/60 to-primary transition-all duration-700"
-                      style={{ width: `${pct}%` }}
+                      className="h-full rounded-full transition-all duration-700"
+                      style={{ 
+                        width: `${pct}%`,
+                        background: 'linear-gradient(135deg, hsl(245 58% 60%), hsl(280 60% 65%))'
+                      }}
                     />
                   </div>
                 </div>
@@ -47,11 +50,11 @@ const GeographicPage = () => {
           <h3 className="font-semibold text-sm mb-4">Demand Comparison</h3>
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={sorted} layout="vertical">
-              <CartesianGrid strokeDasharray="3 3" stroke="hsl(225 15% 18%)" horizontal={false} />
-              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} />
-              <YAxis type="category" dataKey="district" tick={{ fontSize: 11, fill: "hsl(220 10% 55%)" }} tickLine={false} axisLine={false} width={100} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" horizontal={false} />
+              <XAxis type="number" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} />
+              <YAxis type="category" dataKey="district" tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }} tickLine={false} axisLine={false} width={100} />
               <Tooltip />
-              <Bar dataKey="demand" fill="hsl(168 80% 50%)" radius={[0, 4, 4, 0]} name="Demand" />
+              <Bar dataKey="demand" fill="hsl(245 58% 60%)" radius={[0, 6, 6, 0]} name="Demand" />
             </BarChart>
           </ResponsiveContainer>
         </GlassCard>
