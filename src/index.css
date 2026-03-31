@@ -7,57 +7,60 @@
 @layer base {
   :root {
     --background: 240 20% 97%;
-    --foreground: 230 25% 18%;
+    --foreground: 230 25% 15%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 230 25% 18%;
+    --card: 251 100% 97%;
+    --card-foreground: 230 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 230 25% 18%;
+    --popover-foreground: 230 25% 15%;
 
-    --primary: 252 70% 57%;
+    --primary: 245 58% 60%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 240 15% 93%;
-    --secondary-foreground: 230 25% 18%;
+    --secondary-foreground: 230 25% 15%;
 
     --muted: 240 12% 92%;
     --muted-foreground: 230 10% 46%;
 
-    --accent: 252 60% 94%;
-    --accent-foreground: 252 70% 45%;
+    --accent: 245 50% 92%;
+    --accent-foreground: 245 58% 50%;
 
     --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
     --border: 240 10% 90%;
     --input: 240 10% 90%;
-    --ring: 252 70% 57%;
+    --ring: 245 58% 60%;
 
     --radius: 0.875rem;
 
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 230 10% 46%;
-    --sidebar-primary: 252 70% 57%;
+    --sidebar-primary: 245 58% 60%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 252 60% 94%;
-    --sidebar-accent-foreground: 252 70% 45%;
+    --sidebar-accent: 245 50% 94%;
+    --sidebar-accent-foreground: 245 58% 50%;
     --sidebar-border: 240 10% 92%;
-    --sidebar-ring: 252 70% 57%;
+    --sidebar-ring: 245 58% 60%;
 
     --glass: 0 0% 100%;
-    --glass-border: 240 10% 92%;
-    --glass-hover: 252 60% 97%;
+    --glass-border: 245 30% 90%;
+    --glass-hover: 245 50% 97%;
 
     --success: 152 60% 42%;
     --warning: 28 90% 55%;
     --info: 210 80% 55%;
 
-    --chart-1: 252 70% 57%;
+    --chart-1: 245 58% 60%;
     --chart-2: 340 72% 60%;
     --chart-3: 28 90% 55%;
     --chart-4: 210 80% 55%;
     --chart-5: 170 60% 45%;
+
+    --gradient-start: 245 58% 60%;
+    --gradient-end: 280 60% 65%;
   }
 }
 
@@ -74,8 +77,9 @@
 
 @layer components {
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-glass-border rounded-2xl;
-    box-shadow: 0 2px 20px rgba(120, 90, 200, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    background: #F1EEFF;
+    @apply backdrop-blur-xl border border-glass-border rounded-2xl;
+    box-shadow: 0 2px 20px rgba(100, 80, 200, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
   }
 
   .glass-card-hover {
@@ -83,13 +87,36 @@
   }
 
   .glass-card-hover:hover {
-    @apply border-primary/25;
-    box-shadow: 0 8px 32px rgba(120, 90, 200, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 32px rgba(100, 80, 200, 0.14), 0 2px 8px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: hsl(245 58% 60% / 0.25);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(245 58% 60%), hsl(280 60% 65%));
+  }
+
+  .gradient-primary-light {
+    background: linear-gradient(135deg, hsl(245 58% 60% / 0.08), hsl(280 60% 65% / 0.08));
+  }
+
+  .gradient-primary-soft {
+    background: linear-gradient(135deg, hsl(245 50% 95%), hsl(280 50% 95%));
+  }
+
+  .gradient-btn {
+    background: linear-gradient(135deg, hsl(245 58% 60%), hsl(280 60% 65%));
+    @apply text-white font-medium rounded-xl px-5 py-2.5 transition-all duration-300;
+    box-shadow: 0 4px 15px hsl(245 58% 60% / 0.3);
+  }
+
+  .gradient-btn:hover {
+    box-shadow: 0 6px 25px hsl(245 58% 60% / 0.45);
     transform: translateY(-1px);
   }
 
   .glow-primary {
-    box-shadow: 0 0 24px hsl(252 70% 57% / 0.18);
+    box-shadow: 0 0 24px hsl(245 58% 60% / 0.2);
   }
 
   .glow-accent {
@@ -97,11 +124,18 @@
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-[hsl(340,72%,60%)];
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(245 58% 60%), hsl(280 60% 65%));
   }
 
   .kpi-icon {
     @apply w-10 h-10 rounded-xl flex items-center justify-center;
+  }
+
+  .sidebar-active-gradient {
+    background: linear-gradient(135deg, hsl(245 58% 60%), hsl(280 60% 65%));
+    @apply text-white rounded-xl;
+    box-shadow: 0 4px 12px hsl(245 58% 60% / 0.35);
   }
 
   .scrollbar-thin::-webkit-scrollbar {
