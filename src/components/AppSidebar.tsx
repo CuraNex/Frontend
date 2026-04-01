@@ -10,7 +10,8 @@ import {
   Settings,
   Search,
   Bell,
-  ChevronLeft,
+  MessageSquare,
+  ArrowRight,
 } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,43 +23,31 @@ const navItems = [
   { title: "SKU Analytics", path: "/sku", icon: Pill },
   { title: "Alerts", path: "/alerts", icon: AlertTriangle },
   { title: "Geographic", path: "/geographic", icon: Globe },
+  { title: "Messages", path: "#", icon: MessageSquare, badge: 6 },
   { title: "Model Insights", path: "/admin", icon: Settings },
 ];
 
 export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
-  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen w-full">
-      <motion.aside
-        animate={{ width: collapsed ? 72 : 240 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="fixed top-0 left-0 h-screen bg-sidebar border-r border-sidebar-border z-50 flex flex-col overflow-hidden"
-      >
+    <div className="flex min-h-screen w-full p-4 gap-0">
+      {/* Sidebar */}
+      <aside className="w-[260px] shrink-0 bg-white/90 backdrop-blur-xl rounded-l-3xl flex flex-col overflow-hidden border-r border-border/50">
         {/* Logo */}
-        <div className="h-16 flex items-center px-4 border-b border-sidebar-border shrink-0">
+        <div className="h-16 flex items-center px-5 shrink-0 mt-2">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center shrink-0 glow-primary">
+            <div className="w-9 h-9 rounded-xl gradient-primary flex items-center justify-center shrink-0 glow-primary">
               <Pill className="w-4 h-4 text-white" />
             </div>
-            <AnimatePresence>
-              {!collapsed && (
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="font-bold text-lg tracking-tight whitespace-nowrap text-gradient"
-                >
-                  CuraNex
-                </motion.span>
-              )}
-            </AnimatePresence>
+            <span className="font-bold text-xl tracking-tight text-foreground">
+              CuraNex
+            </span>
           </div>
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto scrollbar-thin">
+        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto scrollbar-thin">
           {navItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -69,47 +58,35 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? "sidebar-active-gradient"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 }`}
                 activeClassName=""
               >
                 <item.icon className="w-5 h-5 shrink-0" />
-                <AnimatePresence>
-                  {!collapsed && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="whitespace-nowrap"
-                    >
-                      {item.title}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                <span className="whitespace-nowrap flex-1">{item.title}</span>
+                {item.badge && (
+                  <span className="w-5 h-5 rounded-full bg-destructive text-destructive-foreground text-[10px] font-bold flex items-center justify-center">
+                    {item.badge}
+                  </span>
+                )}
               </NavLink>
             );
           })}
         </nav>
 
-        {/* Collapse toggle */}
-        <div className="p-2 border-t border-sidebar-border shrink-0">
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="w-full flex items-center justify-center p-2 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent transition-colors"
-          >
-            <ChevronLeft className={`w-4 h-4 transition-transform duration-200 ${collapsed ? "rotate-180" : ""}`} />
+        {/* Upgrade Button */}
+        <div className="p-4 shrink-0">
+          <button className="w-full gradient-btn flex items-center justify-center gap-2 py-3 rounded-2xl text-sm">
+            Upgrade Now
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
-      </motion.aside>
+      </aside>
 
       {/* Main content */}
-      <motion.div
-        animate={{ marginLeft: collapsed ? 72 : 240 }}
-        transition={{ duration: 0.2, ease: "easeInOut" }}
-        className="flex-1 flex flex-col min-h-screen"
-      >
+      <div className="flex-1 flex flex-col min-h-0 bg-white/60 backdrop-blur-xl rounded-r-3xl overflow-hidden">
         {/* Top bar */}
-        <header className="h-16 border-b border-border bg-white/80 backdrop-blur-sm sticky top-0 z-40 flex items-center justify-between px-6">
+        <header className="h-16 border-b border-border/40 bg-white/50 backdrop-blur-sm flex items-center justify-between px-6 shrink-0">
           <div className="flex items-center gap-3 flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground" />
             <input
@@ -123,7 +100,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
               <Bell className="w-5 h-5 text-muted-foreground" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />
             </button>
-            <div className="w-8 h-8 rounded-full gradient-primary flex items-center justify-center text-sm font-semibold text-white">
+            <div className="w-9 h-9 rounded-full gradient-primary flex items-center justify-center text-sm font-semibold text-white">
               A
             </div>
           </div>
@@ -133,7 +110,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
         <main className="flex-1 p-6 overflow-auto">
           {children}
         </main>
-      </motion.div>
+      </div>
     </div>
   );
 };
