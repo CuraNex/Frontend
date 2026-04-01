@@ -26,7 +26,7 @@ const AlertsPage = () => {
   ];
 
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Alerts & Recommendations" description="Proactive supply chain alerts and AI-powered recommendations" />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
@@ -41,6 +41,7 @@ const AlertsPage = () => {
                 key={alert.id}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
+                whileHover={{ y: -6, transition: { duration: 0.15, ease: "easeOut" } }}
                 transition={{ delay: i * 0.05 }}
                 className={`glass-card p-4 border-l-2 ${cfg.color}`}
               >

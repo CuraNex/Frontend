@@ -9,7 +9,7 @@ const AdminPage = () => {
   const best = modelMetrics[0];
 
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Model Insights" description="Machine learning model performance and diagnostics" />
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

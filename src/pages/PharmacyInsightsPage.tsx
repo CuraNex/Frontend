@@ -10,7 +10,7 @@ const PharmacyInsightsPage = () => {
   const [selected, setSelected] = useState(pharmacies[0]);
 
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Pharmacy Insights" description="Individual pharmacy profiles and AI-driven insights" />
 
       {/* Pharmacy selector */}

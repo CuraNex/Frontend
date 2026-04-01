@@ -81,18 +81,25 @@
 @layer components {
   .glass-card {
     background: rgba(255, 255, 255, 0.4);
-    @apply backdrop-blur-md rounded-2xl border border-white/50;
-    box-shadow: 0 2px 16px rgba(130, 100, 220, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
+    @apply backdrop-blur-md rounded-2xl border border-white/50 transition-all duration-300;
+    box-shadow: 0 6px 22px rgba(130, 100, 220, 0.10), 0 2px 6px rgba(0, 0, 0, 0.03);
+    will-change: transform, box-shadow;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 44px rgba(130, 100, 220, 0.18), 0 6px 18px rgba(0, 0, 0, 0.06);
   }
 
   .glass-card-hover {
     @apply glass-card transition-all duration-300;
+    will-change: transform, box-shadow;
   }
 
   .glass-card-hover:hover {
-    box-shadow: 0 8px 32px rgba(130, 100, 220, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
-    transform: translateY(-2px);
-    border-color: hsl(252 70% 57% / 0.2);
+    box-shadow: 0 14px 44px rgba(130, 100, 220, 0.18), 0 6px 18px rgba(0, 0, 0, 0.06);
+    transform: translateY(-3px);
+    border-color: hsl(252 70% 57% / 0.25);
   }
 
   .gradient-primary {
@@ -156,5 +163,43 @@
   }
   .scrollbar-thin::-webkit-scrollbar-thumb {
     @apply bg-muted-foreground/20 rounded-full;
+  }
+
+  /* Preloader overlay */
+  .preloader-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    opacity: 1;
+  }
+
+  .preloader-capture {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 400px;
+  }
+
+  .preloader-capture img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .capture-canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity;
+    pointer-events: none;
   }
 }

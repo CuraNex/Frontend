@@ -3,6 +3,11 @@ import { KpiCard } from "@/components/KpiCard";
 import { GlassCard } from "@/components/GlassCard";
 import { kpiData, demandOverTimeData, topDrugsData, districtDemandData } from "@/data/mockData";
 import { Building2, Package, Target, AlertTriangle, TrendingUp, ArrowUpRight } from "lucide-react";
+import pharmacyBuilding from "@/assets/pharmecybuilding.png";
+import capsule from "@/assets/capsule.png";
+import targetImg from "@/assets/target.png";
+import warningImg from "@/assets/warning image.png";
+
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   BarChart, Bar, Legend,
@@ -29,10 +34,46 @@ const DashboardPage = () => {
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard title="Total Pharmacies" value={kpiData.totalPharmacies.toLocaleString()} change="+12 this month" changeType="positive" icon={Building2} delay={0} />
-        <KpiCard title="Total SKUs" value={kpiData.totalSKUs.toLocaleString()} change="+48 new" changeType="positive" icon={Package} iconColor="bg-accent text-accent-foreground" delay={0.05} />
-        <KpiCard title="Forecast Accuracy" value={`${kpiData.forecastAccuracy}%`} change="+1.2% vs last month" changeType="positive" icon={Target} iconColor="bg-success/15 text-success" delay={0.1} />
-        <KpiCard title="Stockout Risk" value={`${kpiData.stockoutRisk}%`} change="-0.5% vs last month" changeType="positive" icon={AlertTriangle} iconColor="bg-warning/15 text-warning" delay={0.15} />
+        <KpiCard
+          title="TOTAL PHARMACIES"
+          value={kpiData.totalPharmacies.toLocaleString()}
+          change="+12 this month"
+          changeType="positive"
+          icon={Building2}
+          imageSrc={pharmacyBuilding}
+          imageAlt="Pharmacy"
+          delay={0}
+        />
+        <KpiCard
+          title="TOTAL SKUS"
+          value={kpiData.totalSKUs.toLocaleString()}
+          change="+48 new"
+          changeType="positive"
+          icon={Package}
+          imageSrc={capsule}
+          imageAlt="Capsule"
+          delay={0.05}
+        />
+        <KpiCard
+          title="FORECAST ACCURACY"
+          value={`${kpiData.forecastAccuracy}%`}
+          change="+1.2% vs last month"
+          changeType="positive"
+          icon={Target}
+          imageSrc={targetImg}
+          imageAlt="Target"
+          delay={0.1}
+        />
+        <KpiCard
+          title="STOCKOUT RISK"
+          value={`${kpiData.stockoutRisk}%`}
+          change="-0.5% vs last month"
+          changeType="negative"
+          icon={AlertTriangle}
+          imageSrc={warningImg}
+          imageAlt="Warning"
+          delay={0.15}
+        />
       </div>
 
       {/* Charts Row */}

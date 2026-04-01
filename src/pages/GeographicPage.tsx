@@ -8,7 +8,7 @@ const GeographicPage = () => {
   const maxDemand = sorted[0]?.demand || 1;
 
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Geographic Insights" description="District-level demand analysis across Sri Lanka" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

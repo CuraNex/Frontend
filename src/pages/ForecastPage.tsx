@@ -28,7 +28,7 @@ const ForecastPage = () => {
   const sliced = forecastData.slice(0, weeks);
 
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Forecast Explorer" description="Explore demand predictions with confidence intervals" />
 
       {/* Filters */}
