@@ -24,7 +24,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 const DashboardPage = () => {
   return (
-    <div className="space-y-6 max-w-[1400px]">
+    <div className="space-y-6 max-w-[1400px] w-full mx-auto">
       <PageHeader title="Dashboard" description="Real-time pharmaceutical demand forecasting overview" />
 
       {/* KPI Cards */}

@@ -72,14 +72,7 @@
   body {
     @apply text-foreground font-sans antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    background: linear-gradient(135deg, 
-      hsl(300 80% 85%) 0%, 
-      hsl(270 70% 82%) 20%, 
-      hsl(250 65% 85%) 35%, 
-      hsl(200 70% 85%) 55%, 
-      hsl(170 60% 82%) 75%, 
-      hsl(320 60% 85%) 100%
-    );
+    background: linear-gradient(135deg, #D5C8F3, #D7D5F3, #D6ECF7, #E3EEF2, #E5EDF0, #E2E9F1, #DFDCF1, #DDD9F0);
     background-attachment: fixed;
     min-height: 100vh;
   }
@@ -87,8 +80,8 @@
 
 @layer components {
   .glass-card {
-    background: #F1EEFF;
-    @apply backdrop-blur-xl border border-glass-border rounded-2xl;
+    background: rgba(255, 255, 255, 0.4);
+    @apply backdrop-blur-md rounded-2xl border border-white/50;
     box-shadow: 0 2px 16px rgba(130, 100, 220, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02);
   }
 

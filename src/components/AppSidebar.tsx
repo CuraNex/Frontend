@@ -31,9 +31,11 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
 
   return (
-    <div className="flex min-h-screen w-full p-4 gap-0">
+    <div className="flex min-h-screen w-full gap-0">
       {/* Sidebar */}
-      <aside className="w-[260px] shrink-0 bg-white/90 backdrop-blur-xl rounded-l-3xl flex flex-col overflow-hidden border-r border-border/50">
+      <aside 
+        className="w-[260px] shrink-0 flex flex-col overflow-hidden bg-white/30 backdrop-blur-md border-r border-white/50"
+      >
         {/* Logo */}
         <div className="h-16 flex items-center px-5 shrink-0 mt-2">
           <div className="flex items-center gap-3 min-w-0">
@@ -84,9 +86,9 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-h-0 bg-white/60 backdrop-blur-xl rounded-r-3xl overflow-hidden">
+      <div className="flex-1 flex flex-col min-h-0 bg-transparent overflow-hidden">
         {/* Top bar */}
-        <header className="h-16 border-b border-border/40 bg-white/50 backdrop-blur-sm flex items-center justify-between px-6 shrink-0">
+        <header className="h-16 backdrop-blur-sm flex items-center justify-between px-6 shrink-0 bg-transparent">
           <div className="flex items-center gap-3 flex-1 max-w-md">
             <Search className="w-4 h-4 text-muted-foreground" />
             <input
@@ -107,7 +109,7 @@ export const AppSidebar = ({ children }: { children: React.ReactNode }) => {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-6 overflow-auto">
+        <main className="flex-1 p-6 overflow-auto rounded-tl-3xl">
           {children}
         </main>
       </div>
