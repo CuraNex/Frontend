@@ -89,9 +89,9 @@ export const featureImportance = [
 ];
 
 export const skuDetails = [
-  { sku: "SKU-001", name: "Paracetamol 500mg", category: "Analgesic", price: "LKR 2.50", shelfLife: "36 months", expiryRisk: "Low", stockoutRisk: "Low" },
-  { sku: "SKU-002", name: "Amoxicillin 250mg", category: "Antibiotic", price: "LKR 8.00", shelfLife: "24 months", expiryRisk: "Medium", stockoutRisk: "High" },
-  { sku: "SKU-003", name: "Metformin 500mg", category: "Antidiabetic", price: "LKR 3.50", shelfLife: "36 months", expiryRisk: "Low", stockoutRisk: "Medium" },
-  { sku: "SKU-004", name: "Omeprazole 20mg", category: "GI", price: "LKR 5.00", shelfLife: "24 months", expiryRisk: "Medium", stockoutRisk: "Low" },
-  { sku: "SKU-005", name: "Atorvastatin 10mg", category: "Cardiovascular", price: "LKR 12.00", shelfLife: "30 months", expiryRisk: "Low", stockoutRisk: "Low" },
+  { sku: "SKU-001", name: "Paracetamol 500mg", category: "Analgesic", dosageForm: "Tablet", price: "LKR 2.50", shelfLife: "36 months", avgDemand: 45200, suggestedStock: 52000, expiryRisk: "Low", stockoutRisk: "Low" },
+  { sku: "SKU-002", name: "Amoxicillin 250mg", category: "Antibiotic", dosageForm: "Capsule", price: "LKR 8.00", shelfLife: "24 months", avgDemand: 38900, suggestedStock: 41000, expiryRisk: "Medium", stockoutRisk: "High" },
+  { sku: "SKU-003", name: "Metformin 500mg", category: "Antidiabetic", dosageForm: "Tablet", price: "LKR 3.50", shelfLife: "36 months", avgDemand: 32100, suggestedStock: 35000, expiryRisk: "Low", stockoutRisk: "Medium" },
+  { sku: "SKU-004", name: "Omeprazole 20mg", category: "GI", dosageForm: "Capsule", price: "LKR 5.00", shelfLife: "24 months", avgDemand: 28700, suggestedStock: 31000, expiryRisk: "Medium", stockoutRisk: "Low" },
+  { sku: "SKU-005", name: "Atorvastatin 10mg", category: "Cardiovascular", dosageForm: "Tablet", price: "LKR 12.00", shelfLife: "30 months", avgDemand: 25300, suggestedStock: 28000, expiryRisk: "Low", stockoutRisk: "Low" },
 ];

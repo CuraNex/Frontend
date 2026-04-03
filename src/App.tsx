@@ -9,7 +9,6 @@ import ForecastPage from "./pages/ForecastPage";
 import PharmacyInsightsPage from "./pages/PharmacyInsightsPage";
 import SkuAnalyticsPage from "./pages/SkuAnalyticsPage";
 import AlertsPage from "./pages/AlertsPage";
-import GeographicPage from "./pages/GeographicPage";
 import RecommendationsPage from "./pages/RecommendationsPage";
 import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";

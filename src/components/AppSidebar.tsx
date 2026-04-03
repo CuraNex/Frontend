@@ -24,7 +24,7 @@ const navItems: Array<{
   { title: "Forecast Explorer", path: "/forecast", icon: TrendingUp },
   { title: "Pharmacy Insights", path: "/pharmacies", icon: Building2 },
   { title: "SKU Analytics", path: "/sku", icon: Pill },
-  { title: "Alerts", path: "/alerts", icon: AlertTriangle },
+  { title: "Anomaly Alerts", path: "/alerts", icon: AlertTriangle },
   { title: "Recommendations", path: "/recommendations", icon: Globe },
   { title: "Model Insights", path: "/admin", icon: Settings },
 ];
