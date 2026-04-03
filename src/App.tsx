@@ -10,6 +10,7 @@ import PharmacyInsightsPage from "./pages/PharmacyInsightsPage";
 import SkuAnalyticsPage from "./pages/SkuAnalyticsPage";
 import AlertsPage from "./pages/AlertsPage";
 import GeographicPage from "./pages/GeographicPage";
+import RecommendationsPage from "./pages/RecommendationsPage";
 import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 import { useState } from "react";
@@ -36,7 +37,7 @@ const App = () => {
                 <Route path="/pharmacies" element={<PharmacyInsightsPage />} />
                 <Route path="/sku" element={<SkuAnalyticsPage />} />
                 <Route path="/alerts" element={<AlertsPage />} />
-                <Route path="/geographic" element={<GeographicPage />} />
+                <Route path="/recommendations" element={<RecommendationsPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
