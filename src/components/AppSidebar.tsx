@@ -25,7 +25,7 @@ const navItems: Array<{
   { title: "Pharmacy Insights", path: "/pharmacies", icon: Building2 },
   { title: "SKU Analytics", path: "/sku", icon: Pill },
   { title: "Alerts", path: "/alerts", icon: AlertTriangle },
-  { title: "Geographic", path: "/geographic", icon: Globe },
+  { title: "Recommendations", path: "/recommendations", icon: Globe },
   { title: "Model Insights", path: "/admin", icon: Settings },
 ];
 
