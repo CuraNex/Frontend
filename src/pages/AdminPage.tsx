@@ -220,16 +220,35 @@ const AdminPage = () => {
             ))}
           </div>
           <ResponsiveContainer width="100%" height={320}>
-            <RadarChart data={evalData.radarData} margin={{ top: 16, right: 32, bottom: 16, left: 32 }}>
-              <PolarGrid stroke="hsl(230 15% 75%)" />
-              <PolarAngleAxis dataKey="metric" tick={{ fontSize: 12, fill: "hsl(230 10% 46%)", fontWeight: 500 }} />
-              <PolarRadiusAxis angle={90} domain={[0, 1]} tickCount={5} tick={{ fontSize: 10, fill: "hsl(230 10% 55%)" }} axisLine={false} />
+            <RadarChart 
+              data={evalData.radarData} 
+              margin={{ top: 16, right: 32, bottom: 16, left: 32 }}
+              startAngle={90}
+            >
+              <PolarGrid gridType="circle" stroke="hsl(230 15% 70%)" strokeWidth={0.5} />
+              <PolarAngleAxis 
+                dataKey="metric" 
+                tick={{ fontSize: 11, fill: "hsl(230 10% 40%)", fontWeight: 600 }} 
+              />
+              <PolarRadiusAxis 
+                angle={90} 
+                domain={[0, 1]} 
+                tickCount={6} 
+                tick={{ fontSize: 9, fill: "hsl(230 10% 50%)" }} 
+                axisLine={false}
+                orientation="middle"
+              />
               {evalData.radarModels.map((m) => (
-                <Radar key={m} name={m} dataKey={m}
-                  stroke={MODEL_COLORS[m] ?? "#888"} fill={MODEL_COLORS[m] ?? "#888"}
-                  fillOpacity={m === evalData.rankings[0]?.model ? 0.18 : 0.04}
-                  strokeWidth={m === evalData.rankings[0]?.model ? 2.5 : 1.5}
-                  dot={m === evalData.rankings[0]?.model}
+                <Radar 
+                  key={m} 
+                  name={m} 
+                  dataKey={m}
+                  stroke={MODEL_COLORS[m] ?? "#888"} 
+                  fill={MODEL_COLORS[m] ?? "#888"}
+                  fillOpacity={m === evalData.rankings[0]?.model ? 0.25 : 0.06}
+                  strokeWidth={m === evalData.rankings[0]?.model ? 2.5 : 1.2}
+                  dot={m === evalData.rankings[0]?.model ? { r: 3, fillOpacity: 1 } : false}
+                  animationDuration={1000}
                 />
               ))}
               <Tooltip content={<RadarTooltip />} />
@@ -310,69 +329,18 @@ const AdminPage = () => {
           </div>
         </div>
 
-        {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-          {/* Left — Feature Importance */}
+        {/* Model Deep-Dive — Now single column focusing on Scatter Plot */}
+        <div className="mt-8 space-y-6">          {/* Actual vs Predicted scatter — Full Width Focus */}
           <div>
-            <p className="text-xs font-medium text-muted-foreground mb-3 flex items-center gap-1.5">
-              <span className="inline-block w-2 h-2 rounded-full" style={{ background: modelColor }} />
-              Feature Importance — {selectedModel}
-            </p>
-            {deepDive && deepDive.featureImportance.length > 0 ? (
-              <ResponsiveContainer width="100%" height={320}>
-                <BarChart
-                  data={deepDive.featureImportance}
-                  layout="vertical"
-                  margin={{ top: 4, right: 16, left: 0, bottom: 4 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" horizontal={false} />
-                  <XAxis
-                    type="number"
-                    tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }}
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={(v) => v.toFixed(2)}
-                    domain={[0, "auto"]}
-                  />
-                  <YAxis
-                    type="category"
-                    dataKey="feature"
-                    tick={{ fontSize: 11, fill: "hsl(230 10% 46%)" }}
-                    tickLine={false}
-                    axisLine={false}
-                    width={150}
-                  />
-                  <Tooltip content={<FeatureTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
-                  <Bar dataKey="importance" radius={[0, 6, 6, 0]} name="Importance" maxBarSize={20}>
-                    {deepDive.featureImportance.map((_, idx) => (
-                      <Cell
-                        key={`fi-${idx}`}
-                        fill={modelColor}
-                        fillOpacity={1 - idx * 0.07}
-                      />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            ) : (
-              <div className="flex items-center justify-center h-[320px] rounded-xl border border-border/40 bg-white/20">
-                <p className="text-sm text-muted-foreground">Feature importance not available for {selectedModel}</p>
-              </div>
-            )}
-          </div>
-
-          {/* Right — Actual vs Predicted scatter */}
-          <div>
-            <p className="text-xs font-medium text-muted-foreground mb-3 flex items-center gap-1.5">
-              <span className="inline-block w-2 h-2 rounded-full" style={{ background: modelColor }} />
-              {selectedModel} — Actual vs Predicted (Test)
+            <p className="text-xs font-medium text-muted-foreground mb-4 flex items-center gap-2 px-1">
+              <span className="inline-block w-2.5 h-2.5 rounded-full" style={{ background: modelColor }} />
+              {selectedModel} — Actual vs Predicted (Validation Test Set)
             </p>
             {deepDive && deepDive.scatter.length > 0 ? (
-              <>
-                <ResponsiveContainer width="100%" height={320}>
-                  <ScatterChart margin={{ top: 4, right: 16, bottom: 24, left: 8 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" />
+              <div className="bg-white/10 rounded-2xl p-4 border border-border/30">
+                <ResponsiveContainer width="100%" height={400}>
+                  <ScatterChart margin={{ top: 16, right: 36, bottom: 32, left: 16 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(240 10% 85%)" vertical={false} />
                     <XAxis
                       type="number"
                       dataKey="x"
@@ -383,10 +351,10 @@ const AdminPage = () => {
                       name="Actual"
                     >
                       <Label
-                        value="Actual Quantity"
-                        offset={-12}
+                        value="Actual Demand (Units)"
+                        offset={-20}
                         position="insideBottom"
-                        style={{ fontSize: 11, fill: "hsl(230 10% 46%)" }}
+                        style={{ fontSize: 11, fill: "hsl(230 10% 46%)", fontWeight: 500 }}
                       />
                     </XAxis>
                     <YAxis
@@ -399,11 +367,11 @@ const AdminPage = () => {
                       name="Predicted"
                     >
                       <Label
-                        value="Predicted Quantity"
+                        value="Predicted Demand (Units)"
                         angle={-90}
                         position="insideLeft"
-                        offset={16}
-                        style={{ fontSize: 11, fill: "hsl(230 10% 46%)" }}
+                        offset={12}
+                        style={{ fontSize: 11, fill: "hsl(230 10% 46%)", fontWeight: 500 }}
                       />
                     </YAxis>
                     <Tooltip content={<ScatterTooltip />} cursor={{ strokeDasharray: "3 3" }} />
@@ -412,7 +380,7 @@ const AdminPage = () => {
                     <Scatter
                       name="Perfect forecast"
                       data={perfectLine}
-                      line={{ stroke: "#FFD400", strokeWidth: 2, strokeDasharray: "8 5" }}
+                      line={{ stroke: "hsl(var(--primary))", strokeWidth: 2, strokeDasharray: "8 5", opacity: 0.4 }}
                       shape={() => null as any}
                       legendType="none"
                     />
@@ -422,32 +390,26 @@ const AdminPage = () => {
                       name={selectedModel}
                       data={deepDive.scatter}
                       fill={modelColor}
-                      fillOpacity={0.55}
+                      fillOpacity={0.5}
                       shape={(props: any) => (
                         <circle
                           cx={props.cx}
                           cy={props.cy}
-                          r={3.5}
+                          r={4.5}
                           fill={modelColor}
-                          fillOpacity={0.5}
+                          fillOpacity={0.6}
                           stroke={modelColor}
-                          strokeOpacity={0.8}
                           strokeWidth={0.5}
+                          strokeOpacity={0.8}
                         />
                       )}
                     />
                   </ScatterChart>
                 </ResponsiveContainer>
-
-                {/* Perfect forecast legend */}
-                <div className="flex items-center gap-2 mt-2 px-1">
-                  <span className="inline-block w-8 h-0 border-t-2 border-dashed border-amber-400" />
-                  <span className="text-xs text-muted-foreground">Perfect forecast</span>
-                </div>
-              </>
+              </div>
             ) : (
-              <div className="flex items-center justify-center h-[320px] rounded-xl border border-border/40 bg-white/20">
-                <p className="text-sm text-muted-foreground">Scatter data not available for {selectedModel}</p>
+              <div className="flex items-center justify-center h-[320px] rounded-2xl border border-border/40 bg-white/20">
+                <p className="text-sm text-muted-foreground">Scatter plot data not available for {selectedModel}</p>
               </div>
             )}
           </div>
